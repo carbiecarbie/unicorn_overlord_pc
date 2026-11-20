@@ -27,7 +27,7 @@ import ssl
 import urllib.request
 import zipfile
 
-REPOSITORY = 'hachi23/unicorn_overlord_pc'
+REPOSITORY = 'carbiecarbie/unicorn_overlord_pc'
 RELEASES_URL = f'https://api.github.com/repos/{REPOSITORY}/releases?per_page=30'
 ASSETS = {'windows': 'Unicorn-Overlord-PC-windows.zip', 'linux': 'Unicorn-Overlord-x86_64.AppImage'}
 SUMS = 'SHA256SUMS'

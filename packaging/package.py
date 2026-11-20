@@ -237,7 +237,7 @@ def main():
         commit = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=edition, text=True).strip()
         (dist / 'licenses' / 'shadps4' / 'SOURCE.txt').write_text(
             'The shadPS4 renderer (_internal/runtime/bin/shadps4/) is built from branch shadps4-edition,\n'
-            f'revision {commit}:\nhttps://github.com/hachi23/unicorn_overlord_pc/tree/{commit}\n'
+            f'revision {commit}:\nhttps://github.com/carbiecarbie/unicorn_overlord_pc/tree/{commit}\n'
             'Its source archive (with the shadPS4 video core and the other submodules) is attached\n'
             'to the release as unicorn-shadps4-source-<revision>.tar.gz.\n', encoding='utf-8')
     (dist / 'README.txt').write_text(
@@ -245,9 +245,9 @@ def main():
         'Keep this folder together (the program, _internal/, LICENSE and licenses/). Settings,\n'
         'the installed game, logs and saves are in data/ beside the program. After an error the\n'
         'program offers a reviewed diagnostics ZIP (also: start it with --export-diagnostics).\n'
-        'Help: https://github.com/hachi23/unicorn_overlord_pc/blob/main/docs/TROUBLESHOOTING.md\n'
+        'Help: https://github.com/carbiecarbie/unicorn_overlord_pc/blob/main/docs/TROUBLESHOOTING.md\n'
         'Other languages (experimental): '
-        'https://github.com/hachi23/unicorn_overlord_pc/blob/main/docs/LANGUAGE_MODS.md\n', encoding='utf-8')
+        'https://github.com/carbiecarbie/unicorn_overlord_pc/blob/main/docs/LANGUAGE_MODS.md\n', encoding='utf-8')
     revision = subprocess.check_output(['git', 'rev-parse', '--short=12', 'HEAD'], cwd=ROOT, text=True).strip()
     target = 'windows' if WINDOWS else 'linux'
     with tarfile.open(dist.parent / f'{key}-{target}-symbols-{revision}.tar.gz', 'w:gz') as symbols:
