@@ -27,6 +27,9 @@ Integrado no fork em 2026-11-20 (merge `7166790`):
   telas iniciais, sem erro no log. Repetido depois da integração em Fit, em Stretch e em 21:9.
   Ninguém jogou nem olhou a imagem nessas execuções.
 
+- Pacote para Windows gerado a partir de `5971b3a` (build `--static` e PyInstaller): o jogo
+  inicia pelo `Unicorn Overlord.exe` empacotado, por 45 s, sem erro no log. Só renderer nativo.
+
 ## O que funciona (segundo o autor original, até a v1.6.2)
 
 - Dump suportado: CUSA36381 (Ásia) v01.04, com ou sem o patch de inglês, e o pacote de Hong Kong

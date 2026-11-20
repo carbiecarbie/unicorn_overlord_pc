@@ -18,6 +18,13 @@ Atualizado em 2026-11-20.
   `C:\msys64\usr\bin\bash.exe -lc`. Leva cerca de 12 s.
 - Testes nativos no build de desenvolvimento: os alvos `*-test` do CMake em `out/gpu`
   (`packaging/test-native.sh` espera `out/gpu-static`, do build `--static`).
+- Pacote para Windows: o `packaging/deps.sh` recusa caminhos com espaço, e o clone fica em
+  `Unicorn Overlord\`. Use um worktree sem espaços (`D:\Projetos\uo-pkg`, que já tem as
+  bibliotecas estáticas compiladas em `out/deps`). Lá: `bash packaging/windows/build.sh unicorn`
+  no CLANG64 e depois, num shell normal com `C:\msys64\clang64\bin` no `PATH`,
+  `py -3 packaging/package.py unicorn` (o `py` não é visto de dentro do MSYS2). Sai em `dist/`.
+- O `curl` do MSYS2 falhou na verificação de certificado ao baixar as fontes. Elas foram baixadas
+  com o `curl` do Windows para `out/deps/src` e conferidas pelo SHA-256 fixado no `deps.sh`.
 - Rodar: `VW_GAME_DIR=<dump> VW_DATA_DIR=run_uo py -3 run.py`. `run_uo/` está no `.gitignore`.
 - A instalação de jogo para testes fica ao lado do clone, em
   `..\Unicorn.Overlord-game\Unicorn.Overlord-P2P` (programa v1.6.2 empacotado). O dump está em
@@ -29,7 +36,16 @@ Atualizado em 2026-11-20.
 ## Pendências
 
 - O ruleset "Protect main" do upstream não vem com o fork; decidir se o fork terá um.
-- O build `--static` e o empacotamento (`packaging/windows/build.sh`) ainda não foram feitos.
+- O atualizador do launcher agora consulta os releases do fork (`scripts/updates.py`,
+  `REPOSITORY`), que ainda não tem nenhum, então não oferece nada. Antes oferecia a v1.6.2 do
+  upstream a qualquer build do fork, porque a versão `latest-N-g<hash>` conta como mais antiga
+  que todo release. Os links do pacote (`SOURCE.txt`, `README.txt`) e do modelo de issue também
+  apontam para o fork.
+- O fork ainda não tem esquema de versão: falta decidir a numeração e publicar releases com tag
+  `vX.Y.Z` (o atualizador só enxerga esse formato). O `README.md` ainda diz que o projeto não é
+  mais desenvolvido e aponta os downloads para o upstream.
+- O pacote do fork não inclui o renderer shadPS4 (o oficial inclui os dois); isso depende do
+  branch `shadps4-edition`.
 - Na execução de teste as telas iniciais ficaram em cerca de 33 FPS com a janela sem foco; não
   foi investigado se é o jogo (telas de logo) ou limitação com a janela em segundo plano.
 
@@ -38,4 +54,4 @@ Atualizado em 2026-11-20.
 1. Jogar além do capítulo 1 com `VW_FRAME_STATS=1` e anotar as linhas `Native:` do log; conferir
    na tela o Fit, o Stretch e o mouse no mapa de batalha.
 2. Fazer uma sessão longa (mais de 90 minutos) para exercitar a correção de memória.
-3. Fazer o build `--static` e o pacote para Windows.
+3. Definir como o fork numera versões e reescrever o `README.md` para o fork.
