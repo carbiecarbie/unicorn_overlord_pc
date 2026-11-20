@@ -1,23 +1,24 @@
 # Unicorn Overlord PC (vwport)
 
-[![Build](https://github.com/hachi23/unicorn_overlord_pc/actions/workflows/build.yml/badge.svg)](https://github.com/hachi23/unicorn_overlord_pc/actions/workflows/build.yml)
+[![Build](https://github.com/carbiecarbie/unicorn_overlord_pc/actions/workflows/build.yml/badge.svg)](https://github.com/carbiecarbie/unicorn_overlord_pc/actions/workflows/build.yml)
 [![License: GPL v2+](https://img.shields.io/badge/license-GPL--2.0--or--later-blue.svg)](LICENSE)
 
 A native Linux and Windows port of the PlayStation 4 version of **Unicorn Overlord**.
+
+> **This is a fork that continues the port.** [hachi23](https://github.com/hachi23/unicorn_overlord_pc) wrote it and stopped
+> developing it on 2026-11-18, at v1.6.2. This repository carries on from there: see
+> [what changed since v1.6.2](#changes-since-v162). It has **no release of its own yet**; until
+> it has one, the last released build is [upstream v1.6.2](https://github.com/hachi23/unicorn_overlord_pc/releases/tag/v1.6.2).
 
 ## ⚠️ Graphics problems? Switch to shadPS4.
 
 ### In the game: Insert (or R3+L2) > Performance > Renderer > shadPS4 > Apply and restart.
 
-### If that does not work: download the shadPS4 edition (`Unicorn-Overlord-shadPS4-PC-windows.zip` or `Unicorn-Overlord-shadPS4-x86_64.AppImage`) from the [latest release](https://github.com/hachi23/unicorn_overlord_pc/releases/latest).
+### If that does not work: download the shadPS4 edition (`Unicorn-Overlord-shadPS4-PC-windows.zip` or `Unicorn-Overlord-shadPS4-x86_64.AppImage`) from [upstream v1.6.2](https://github.com/hachi23/unicorn_overlord_pc/releases/tag/v1.6.2).
 
 The native renderer (the default since v1.6.0) is faster but experimental. shadPS4 is the
 renderer of v1.5.2 and earlier: slower, but longer tested. Since v1.6.1 the game asks which one
 to use on its first start ([details](#switching-the-renderer)).
-
-> **No longer developed.** Older builds are on the
-> [releases page](https://github.com/hachi23/unicorn_overlord_pc/releases).
-> The source is GPL-2.0-or-later: you are welcome to fork it and change it however you like.
 
 | Dump | State |
 |---|---|
@@ -25,6 +26,20 @@ to use on its first start ([details](#switching-the-renderer)).
 
 > **Not finished.** The game has not been played to the end on the port. It holds 60 FPS on an
 > RX 560X with the native renderer. See [docs/KNOWN_ISSUES.md](docs/KNOWN_ISSUES.md).
+
+### Changes since v1.6.2
+
+- **Portable installs:** `data/launcher.json` keeps its folders relative to the program, so the
+  program folder can be moved ([#116](https://github.com/hachi23/unicorn_overlord_pc/pull/116)).
+- **Screen fit:** Fit or Stretch for screens that are not 16:9, with the battle map mouse
+  following the presented image ([#118](https://github.com/hachi23/unicorn_overlord_pc/pull/118), [#119](https://github.com/hachi23/unicorn_overlord_pc/pull/119)).
+- **Long sessions:** the native renderer releases resized render targets, evicts idle textures
+  when the GPU runs out of memory and no longer stops when a frame has more than 64 MiB of
+  vertex data.
+- **Updates:** the start program looks for releases of this fork.
+
+Checked on Windows 11 with an NVIDIA GPU: the build, the tests and the game starting. Not
+checked: playing with these changes, long sessions, Linux.
 
 ### What it is
 
@@ -53,7 +68,8 @@ Only the dump listed above is supported.
 
 ## Download
 
-Download [the latest release](https://github.com/hachi23/unicorn_overlord_pc/releases/latest):
+**This fork has no release yet.** To run its code, [build it](#building). The last released
+build is [upstream v1.6.2](https://github.com/hachi23/unicorn_overlord_pc/releases/tag/v1.6.2):
 `Unicorn-Overlord-x86_64.AppImage` (Linux) or `Unicorn-Overlord-PC-windows.zip` (Windows).
 It has both renderers, and you can [switch between them](#switching-the-renderer) in the game:
 
@@ -63,7 +79,8 @@ It has both renderers, and you can [switch between them](#switching-the-renderer
 | shadPS4 | The emulated PS4 GPU of v1.5.2 and earlier, slower but longer tested |
 
 The shadPS4 renderer is built from the
-[`shadps4-edition`](https://github.com/hachi23/unicorn_overlord_pc/tree/shadps4-edition) branch.
+[`shadps4-edition`](https://github.com/carbiecarbie/unicorn_overlord_pc/tree/shadps4-edition) branch. A package built locally with
+`packaging/package.py` from `main` alone has only the native renderer.
 Releases also carry the shadPS4 edition (`Unicorn-Overlord-shadPS4-...`), with only the shadPS4
 renderer, so installs of it keep updating. New installs don't need it.
 
@@ -137,7 +154,7 @@ Overworld Menu (with the game's Yes/No question). The menu has four tabs:
 Settings are kept in `vw.ini` in the data directory. The Overlay tab also has a
 **Change game folder** button to reopen setup.
 
-**Updates:** at start the program looks for a newer release on GitHub and asks before
+**Updates:** at start the program looks for a newer release of this fork on GitHub and asks before
 downloading it; the update keeps your settings, saves and installed game. Turn it off with
 **Check for updates at start** in the Insert menu.
 
@@ -195,10 +212,10 @@ patches. The menu shows **Renderer: Native (experimental)** under About.
 chapter 1 (story scenes, the battle map, menus, saving and loading, the English patch, French
 from the Switch text, 21:9 and 32:9, the Hong Kong 1.05 package) on AMD GPUs on Linux. Windows,
 NVIDIA and Intel GPUs, the Steam Deck and later chapters have not been checked by the developer.
-The port is no longer developed. If something is missing or looks wrong,
-[switch to the shadPS4 renderer](#switching-the-renderer). For anyone forking the port: the log lines
-that start with `Native:` and [docs/dev/NATIVE_RENDERER.md](docs/dev/NATIVE_RENDERER.md) are the
-place to start.
+This fork has started it on Windows with an NVIDIA GPU, without playing. If something is missing
+or looks wrong, [switch to the shadPS4 renderer](#switching-the-renderer). For work on the
+renderer, the log lines that start with `Native:` and
+[docs/dev/NATIVE_RENDERER.md](docs/dev/NATIVE_RENDERER.md) are the place to start.
 
 ### Switching the renderer
 
@@ -273,7 +290,7 @@ Linux needs GCC or Clang, CMake, Ninja, Python 3, and the Vulkan, SDL3 and FFmpe
 packages. `shell.nix` lists them.
 
 ```bash
-git clone --recursive https://github.com/hachi23/unicorn_overlord_pc
+git clone --recursive https://github.com/carbiecarbie/unicorn_overlord_pc
 cd unicorn_overlord_pc
 bash build.sh                                  # out/vwport and out/gpu/libvwgpu.so
 VW_GAME_DIR=/path/to/CUSA36381 bash run.sh     # builds, prepares the game and starts it
@@ -346,6 +363,8 @@ attach the run log.
 
 This port stands on the work of others. In order of descent:
 
+- **hachi23**: [unicorn_overlord_pc](https://github.com/hachi23/unicorn_overlord_pc), the author of this port up to v1.6.2: the
+  runtime, the native renderer and its shader translator, the launcher and the packaging.
 - **deadinside28**: [bloodborne_pc](https://github.com/deadinside28/bloodborne_pc), the original
   native port that this approach comes from.
 - **Supermedo**: [bloodborne_pc for Windows](https://github.com/Supermedo/bloodborne_pc).

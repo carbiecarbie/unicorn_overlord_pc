@@ -51,7 +51,7 @@ Locally: `python3 packaging/package.py unicorn` then `bash packaging/linux/appim
 Apply it with the GitHub CLI (needs admin rights on the repository):
 
 ```bash
-gh api -X POST repos/hachi23/unicorn_overlord_pc/rulesets --input .github/main-protection.json
+gh api -X POST repos/carbiecarbie/unicorn_overlord_pc/rulesets --input .github/main-protection.json
 ```
 
 Or in the web interface: Settings → Rules → Rulesets → New ruleset → Import a ruleset, and pick
@@ -66,6 +66,17 @@ threads, current passing builds and no bypass actors. The relevance/correctness 
 evidence in CONTRIBUTING.md remain required. Once an independent reviewer is available, set
 `required_approving_review_count` to 1. The JSON is not active until applied in repository settings.
 
+## Version numbers in this fork
+
+The fork continues upstream's numbering: upstream ended at v1.6.2, so the fork's first release
+is **v1.7.0**. MINOR goes up for a release with new features or renderer changes, PATCH for
+fixes only. Upstream's tags (v1.6.2 and older) came with the fork and are never moved or
+reused. The updater only sees `vMAJOR.MINOR.PATCH` tags (`scripts/updates.py`), and installs of
+upstream builds keep asking upstream's repository, so they do not learn of fork releases by
+themselves.
+
+The fork has no release and no applied branch ruleset yet, and its Build workflow has not run.
+
 ## Making a release
 
 1. Merge to `main`. The `latest` pre-release updates by itself.
@@ -74,8 +85,8 @@ evidence in CONTRIBUTING.md remain required. Once an independent reviewer is ava
 3. Tag the tested commit with an annotated `vMAJOR.MINOR.PATCH` tag and push it. The tag's
    message is the release notes (players see its start in the update dialog):
    ```bash
-   git tag -a v0.1.0 <commit>     # first line: a title; then what changed, for players
-   git push origin v0.1.0
+   git tag -a v1.7.0 <commit>     # first line: a title; then what changed, for players
+   git push origin v1.7.0
    ```
    The Build workflow builds that commit (its version is the tag), then publishes the release
    with the AppImage, the Windows ZIP, symbols, source and `SHA256SUMS`.
@@ -91,9 +102,9 @@ evidence in CONTRIBUTING.md remain required. Once an independent reviewer is ava
    Once the release from step 3 is published, tag the tip of branch `shadps4-edition` with the
    same version plus `-shadps4` and push that tag:
    ```bash
-   git tag -a v0.1.0-shadps4 origin/shadps4-edition -m "v0.1.0 (shadPS4 edition)"
-   git push origin v0.1.0-shadps4
+   git tag -a v1.7.0-shadps4 origin/shadps4-edition -m "v1.7.0 (shadPS4 edition)"
+   git push origin v1.7.0-shadps4
    ```
    That branch's Build workflow uploads its AppImage, ZIP, symbols and source into release
-   `v0.1.0` and merges its checksums into that release's `SHA256SUMS`. Merge any fix to the
+   `v1.7.0` and merges its checksums into that release's `SHA256SUMS`. Merge any fix to the
    game executable shared by both into `shadps4-edition` first, so both packages carry it.
