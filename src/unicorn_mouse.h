@@ -38,6 +38,8 @@ static const struct { const char *build; uint32_t update, manager, field; } curs
     {"Hong Kong 1.05", 0x4575e0, 0x234eee0, 0x234eef0},
 };
 static uint32_t battle_manager, field_manager;
+/* The game image's width / height (the Aspect ratio setting); set before the hook is installed. */
+static float unicorn_mouse_game_aspect = 16.0f / 9.0f;
 static unsigned char *cursor_image;
 
 typedef struct { float x, y, z; } Vec3;
@@ -128,7 +130,7 @@ __attribute__((used)) void ABI unicorn_cursor_after(unsigned char *object) {
     Vec3 to;
     int exact = camera_view(&view);
     if (!have_image) {
-        const float aspect = exact ? SDL_sqrtf(v_dot(view.right, view.right) / v_dot(view.down, view.down)) : 16.0f / 9.0f;
+        const float aspect = exact ? SDL_sqrtf(v_dot(view.right, view.right) / v_dot(view.down, view.down)) : unicorn_mouse_game_aspect;
         const float fit_h = (float)window_w / aspect;
         image.height = exact && fit_h < window_h ? fit_h : (float)window_h;
         image.width = image.height * aspect;
@@ -140,8 +142,9 @@ __attribute__((used)) void ABI unicorn_cursor_after(unsigned char *object) {
         if (exact) wx = to.x - p[0], wz = to.z - p[2];
     }
     if (!exact) {
-        /* World units per window height at the first battle map's default zoom. */
-        wx = dx / image.width * (925.0f * (16.0f / 9.0f));
+        /* World units per image height at the first battle map's default zoom; the image is
+         * unicorn_mouse_game_aspect times as wide (21:9 shows more of the map, not a wider one). */
+        wx = dx / image.width * (925.0f * unicorn_mouse_game_aspect);
         wz = dy / image.height * 1630.0f;
     }
     p[0] += wx, p[2] += wz;
