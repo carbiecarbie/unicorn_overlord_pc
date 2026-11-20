@@ -10,3 +10,10 @@ original como remote `upstream`.
 
 O dump de PS4, os arquivos de texto do Switch, saves e arquivos derivados do executável ficam
 numa pasta fora do clone. Motivo: são material protegido e o projeto é público (GPL).
+
+## 2026-11-20: integrar os PRs abertos do upstream e a correção de memória
+
+Os PRs #116, #118 e #119 e o branch `fix/native-renderer-memory` entraram no `main` do fork por
+merge, preservando a autoria. Motivo: duas revisões independentes não acharam defeito grave e o
+conjunto compila e passa nos testes no Windows. O teto para o transbordo de vértices ficou para
+depois de um teste jogando, porque a causa do estouro original não é conhecida.

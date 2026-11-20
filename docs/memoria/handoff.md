@@ -9,6 +9,8 @@ Atualizado em 2026-11-20.
 - Instalou os pacotes CLANG64 no MSYS2 (`C:\msys64`), compilou o `main` e rodou os testes: tudo
   passou (detalhes em `estado.md`).
 - Iniciou o jogo a partir do código por 55 s (RTX 5080): sem erros no log.
+- Revisou e integrou no `main` os PRs #116, #118 e #119 do upstream e o branch de memória do
+  renderer, com três ajustes do fork (ver `estado.md` e `decisoes.md`).
 
 ## Ambiente local
 
@@ -33,6 +35,7 @@ Atualizado em 2026-11-20.
 
 ## Próximos passos sugeridos
 
-1. Jogar além do capítulo 1 com `VW_FRAME_STATS=1` e anotar as linhas `Native:` do log.
-2. Avaliar os PRs abertos do upstream (#116, #118, #119) para integrar no fork.
+1. Jogar além do capítulo 1 com `VW_FRAME_STATS=1` e anotar as linhas `Native:` do log; conferir
+   na tela o Fit, o Stretch e o mouse no mapa de batalha.
+2. Fazer uma sessão longa (mais de 90 minutos) para exercitar a correção de memória.
 3. Fazer o build `--static` e o pacote para Windows.
