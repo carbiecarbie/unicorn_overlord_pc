@@ -7,6 +7,15 @@ Atualizado em 2026-11-19.
 O fork parte do `main` do upstream em `f190399` (v1.6.2 mais um commit de créditos no README).
 Nenhuma mudança de código do fork ainda.
 
+## Verificado no fork (2026-11-20, Windows 11, RTX 5080, MSYS2 CLANG64 com clang 22.1.8)
+
+- `bash build.sh` compila `out/vwport.exe` sem erros.
+- Testes: 164 testes Python passam (30 pulados no Windows) e os 8 testes nativos do CMake passam
+  (png-decode, perf-overlay, graphics-settings, gpu-platform, services, pad-map, mp3, videodec).
+- O jogo inicia a partir do código (`run.py`) com o renderer nativo numa GPU NVIDIA: 1726 shaders
+  traduzidos (2 falham, os já conhecidos), 29 hooks instalados, frames desenhados por 55 s nas
+  telas iniciais, sem erro no log. Ninguém jogou nem olhou a imagem nessa execução.
+
 ## O que funciona (segundo o autor original, até a v1.6.2)
 
 - Dump suportado: CUSA36381 (Ásia) v01.04, com ou sem o patch de inglês, e o pacote de Hong Kong
