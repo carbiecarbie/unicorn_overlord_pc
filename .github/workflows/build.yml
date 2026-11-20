@@ -254,7 +254,9 @@ jobs:
         run: |
           # Notes: what this build is, .github/prerelease-notes.md, then the pull requests merged since
           # the last published release (GitHub's generated notes, appended after --notes).
-          since=$(gh release view --repo "$GITHUB_REPOSITORY" --json tagName -q .tagName)
+          # Before the fork's first release there is none to view: upstream's last tag, which the
+          # fork has, is the start then.
+          since=$(gh release view --repo "$GITHUB_REPOSITORY" --json tagName -q .tagName 2>/dev/null || echo v1.6.2)
           intro="Test build of \`main\` at ${GITHUB_SHA}, made by the Build workflow after every merge. It is not a release: it has not been play-tested like one. No game files included. The list at the end covers the changes since ${since}."
           gh release delete latest --repo "$GITHUB_REPOSITORY" --yes --cleanup-tag || true
           gh release create latest --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --prerelease \

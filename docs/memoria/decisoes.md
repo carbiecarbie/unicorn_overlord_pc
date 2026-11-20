@@ -18,6 +18,12 @@ merge, preservando a autoria. Motivo: duas revisões independentes não acharam 
 conjunto compila e passa nos testes no Windows. O teto para o transbordo de vértices ficou para
 depois de um teste jogando, porque a causa do estouro original não é conhecida.
 
+## 2026-11-20: proteger o `main` do fork e ativar o CI
+
+O ruleset do upstream foi aplicado ao fork e o workflow Build ficou ativo, a pedido do
+mantenedor. Consequência aceita: toda mudança passa por pull request com CI verde, e cada merge
+publica um pré-release `latest` público.
+
 ## 2026-11-20: o fork continua a numeração do upstream
 
 O primeiro release do fork será a v1.7.0 (o upstream terminou na v1.6.2). MINOR sobe com recurso
