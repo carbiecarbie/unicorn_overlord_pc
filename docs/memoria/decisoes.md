@@ -17,3 +17,10 @@ Os PRs #116, #118 e #119 e o branch `fix/native-renderer-memory` entraram no `ma
 merge, preservando a autoria. Motivo: duas revisões independentes não acharam defeito grave e o
 conjunto compila e passa nos testes no Windows. O teto para o transbordo de vértices ficou para
 depois de um teste jogando, porque a causa do estouro original não é conhecida.
+
+## 2026-11-20: o fork continua a numeração do upstream
+
+O primeiro release do fork será a v1.7.0 (o upstream terminou na v1.6.2). MINOR sobe com recurso
+novo ou mudança no renderer, PATCH só com correções. Motivo: o atualizador compara versões no
+formato `vX.Y.Z` e as tags antigas vieram com o fork; recomeçar a contagem faria um release do
+fork parecer mais antigo que a v1.6.2.

@@ -41,9 +41,9 @@ Atualizado em 2026-11-20.
   upstream a qualquer build do fork, porque a versão `latest-N-g<hash>` conta como mais antiga
   que todo release. Os links do pacote (`SOURCE.txt`, `README.txt`) e do modelo de issue também
   apontam para o fork.
-- O fork ainda não tem esquema de versão: falta decidir a numeração e publicar releases com tag
-  `vX.Y.Z` (o atualizador só enxerga esse formato). O `README.md` ainda diz que o projeto não é
-  mais desenvolvido e aponta os downloads para o upstream.
+- Esquema de versões (em `docs/RELEASING.md`): o fork continua a numeração do upstream, e o
+  primeiro release será a v1.7.0. Nenhum release foi publicado e o workflow de build do fork
+  nunca rodou; o `README.md` diz isso e aponta a v1.6.2 do upstream como último build lançado.
 - O pacote do fork não inclui o renderer shadPS4 (o oficial inclui os dois); isso depende do
   branch `shadps4-edition`.
 - Na execução de teste as telas iniciais ficaram em cerca de 33 FPS com a janela sem foco; não
@@ -54,4 +54,5 @@ Atualizado em 2026-11-20.
 1. Jogar além do capítulo 1 com `VW_FRAME_STATS=1` e anotar as linhas `Native:` do log; conferir
    na tela o Fit, o Stretch e o mouse no mapa de batalha.
 2. Fazer uma sessão longa (mais de 90 minutos) para exercitar a correção de memória.
-3. Definir como o fork numera versões e reescrever o `README.md` para o fork.
+3. Ativar o workflow de build no fork (aba Actions) e, depois de jogar um build, publicar a
+   v1.7.0 seguindo `docs/RELEASING.md`.
