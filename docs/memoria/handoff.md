@@ -11,6 +11,9 @@ Atualizado em 2026-11-20.
 - Iniciou o jogo a partir do código por 55 s (RTX 5080): sem erros no log.
 - Revisou e integrou no `main` os PRs #116, #118 e #119 do upstream e o branch de memória do
   renderer, com três ajustes do fork (ver `estado.md` e `decisoes.md`).
+- Aplicou o ruleset "Protect main", ativou o workflow Build e fez o merge do PR #1 do fork
+  (notas do pré-release e passo de publicação). O pré-release `latest` do fork foi publicado
+  pela primeira vez, com os jobs `Linux`, `Windows` e `Publish` verdes.
 
 ## Ambiente local
 
@@ -41,9 +44,14 @@ Atualizado em 2026-11-20.
   atualizado com o `main`. Para desfazer: Settings > Rules > Rulesets no GitHub, ou
   `gh api -X DELETE repos/carbiecarbie/unicorn_overlord_pc/rulesets/<id>`.
 - O workflow Build está ativo no fork. Cada merge no `main` publica o pré-release `latest` do
-  fork (binários públicos). O primeiro build foi disparado à mão em 2026-11-20; confira o
-  resultado na aba Actions antes de contar com o check de Linux, que no upstream falhava na
-  instalação do toolchain (erro 503 do PPA).
+  fork (binários públicos). O job de Linux, que no upstream falhava na instalação do toolchain
+  (erro 503 do PPA), passa no fork.
+- A tag `latest` veio do upstream com o fork, e na primeira publicação o release ficou preso ao
+  commit antigo dela; foi movida à mão para o commit do merge. Nos próximos merges o workflow
+  apaga e recria a tag sozinho, porque já existe um release do fork.
+- Use `gh` sempre com `--repo carbiecarbie/unicorn_overlord_pc`: sem isso ele consulta o
+  upstream, cujo PR #1 é outro.
+- Ninguém baixou nem jogou o pacote do `latest` do fork.
 - O atualizador do launcher agora consulta os releases do fork (`scripts/updates.py`,
   `REPOSITORY`), que ainda não tem nenhum, então não oferece nada. Antes oferecia a v1.6.2 do
   upstream a qualquer build do fork, porque a versão `latest-N-g<hash>` conta como mais antiga

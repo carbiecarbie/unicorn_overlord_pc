@@ -47,8 +47,8 @@ Integrado no fork em 2026-11-20 (merge `7166790`):
   2 shaders não encontrados (`e041714c`, `546af9ea`), cache de pipelines sem limite.
 - A correção de memória do renderer só foi testada com falta de memória simulada, não na
   GTX 1080 que relatou as falhas (após 44 a 91 minutos). O transbordo de vértices não tem teto.
-- O que foi integrado nunca rodou no Linux (o CI de Linux do upstream falhou antes de compilar,
-  por erro 503 do servidor de pacotes).
+- No Linux, o que foi integrado compila e passa nos testes do CI do fork (2026-11-20), mas
+  ninguém jogou lá.
 - Um `VW_DATA_DIR` relativo em build empacotado passa a ser lido a partir da pasta do programa;
   quem usava isso antes pode começar com a pasta de dados vazia (os saves não são apagados).
 - Windows com o renderer nativo, NVIDIA, Intel, Steam Deck e ultrawide não foram testados pelo
