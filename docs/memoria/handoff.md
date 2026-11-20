@@ -35,15 +35,23 @@ Atualizado em 2026-11-20.
 
 ## Pendências
 
-- O ruleset "Protect main" do upstream não vem com o fork; decidir se o fork terá um.
+- O `main` do fork está protegido pelo ruleset "Protect main" (`.github/main-protection.json`,
+  aplicado em 2026-11-20): nada entra por push direto, nem do dono. Toda mudança, inclusive a
+  memória do projeto, vai por pull request com os checks `Linux` e `Windows` verdes e o branch
+  atualizado com o `main`. Para desfazer: Settings > Rules > Rulesets no GitHub, ou
+  `gh api -X DELETE repos/carbiecarbie/unicorn_overlord_pc/rulesets/<id>`.
+- O workflow Build está ativo no fork. Cada merge no `main` publica o pré-release `latest` do
+  fork (binários públicos). O primeiro build foi disparado à mão em 2026-11-20; confira o
+  resultado na aba Actions antes de contar com o check de Linux, que no upstream falhava na
+  instalação do toolchain (erro 503 do PPA).
 - O atualizador do launcher agora consulta os releases do fork (`scripts/updates.py`,
   `REPOSITORY`), que ainda não tem nenhum, então não oferece nada. Antes oferecia a v1.6.2 do
   upstream a qualquer build do fork, porque a versão `latest-N-g<hash>` conta como mais antiga
   que todo release. Os links do pacote (`SOURCE.txt`, `README.txt`) e do modelo de issue também
   apontam para o fork.
 - Esquema de versões (em `docs/RELEASING.md`): o fork continua a numeração do upstream, e o
-  primeiro release será a v1.7.0. Nenhum release foi publicado e o workflow de build do fork
-  nunca rodou; o `README.md` diz isso e aponta a v1.6.2 do upstream como último build lançado.
+  primeiro release será a v1.7.0. Nenhum release foi publicado; o `README.md` diz isso e aponta
+  a v1.6.2 do upstream como último build lançado.
 - O pacote do fork não inclui o renderer shadPS4 (o oficial inclui os dois); isso depende do
   branch `shadps4-edition`.
 - Na execução de teste as telas iniciais ficaram em cerca de 33 FPS com a janela sem foco; não
@@ -54,5 +62,4 @@ Atualizado em 2026-11-20.
 1. Jogar além do capítulo 1 com `VW_FRAME_STATS=1` e anotar as linhas `Native:` do log; conferir
    na tela o Fit, o Stretch e o mouse no mapa de batalha.
 2. Fazer uma sessão longa (mais de 90 minutos) para exercitar a correção de memória.
-3. Ativar o workflow de build no fork (aba Actions) e, depois de jogar um build, publicar a
-   v1.7.0 seguindo `docs/RELEASING.md`.
+3. Depois de jogar um build do CI, publicar a v1.7.0 seguindo `docs/RELEASING.md`.

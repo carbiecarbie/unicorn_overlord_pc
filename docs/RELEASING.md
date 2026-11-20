@@ -75,7 +75,7 @@ reused. The updater only sees `vMAJOR.MINOR.PATCH` tags (`scripts/updates.py`), 
 upstream builds keep asking upstream's repository, so they do not learn of fork releases by
 themselves.
 
-The fork has no release and no applied branch ruleset yet, and its Build workflow has not run.
+The fork has no release yet. Its `main` has the ruleset below applied since 2026-11-20.
 
 ## Making a release
 
