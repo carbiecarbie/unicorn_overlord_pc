@@ -196,8 +196,12 @@ the HK 1.05 title. Performance: the opening at 60 FPS (v1.5.2: 36-54) on the RX 
    0x11) are not drawn; compute shaders other than the fill are not run; render targets are
    assumed RGBA8.
 4. **CPU reads of rendered memory** other than the thumbnail path return nothing.
-5. **Long sessions**: target, texture and pipeline caches are not bounded; textures are checked
-   for new content round robin (64 MiB per frame) and never freed.
+5. **Long sessions**: resized render targets are released after their frame, and idle textures
+   are evicted when Vulkan reports that device memory ran out (`allocate_image_memory`). Vertex
+   data over the 64 MiB ring spills into extra per-frame buffers that are kept and have no cap.
+   Tested with a simulated memory budget only (`tests/test_native_memory.c`), not on the
+   GTX 1080 that reported the failures (after 44 to 91 minutes). The pipeline cache is not
+   bounded; textures are checked for new content round robin (64 MiB per frame).
 6. **Recording** runs on the game thread (~0.6 µs per draw); replay could move to its own thread.
 7. Small cleanups found in review: the presenter's `ChooseFormat` falls back to R8G8B8A8 even
    when the surface does not list it; the record layout is defined in two files (a shared

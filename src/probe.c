@@ -1115,7 +1115,10 @@ int main(int argc, char **argv) {
     }
     install_unicorn_text_language(app0);
     re_watch_start(image);
-    if (unicorn_known_build(app0)) install_unicorn_mouse(image, size);
+    if (unicorn_known_build(app0)) {
+        unicorn_mouse_game_aspect = aspect_ratio_setting();
+        install_unicorn_mouse(image, size);
+    }
 #ifdef _WIN32
     printf("Guest TCB loads redirected to the TEB TLS slot: %" PRIu64 "\n", patch_tcb_loads(segments, ns));
 #endif
